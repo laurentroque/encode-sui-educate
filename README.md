@@ -12,6 +12,6 @@ Sui Foundation Git Repo: https://github.com/sui-foundation/encode-sui-educate
 
 - car -> Smart Contract
 
-- ??? -> NFT Contract
+- nft_tutorial -> NFT Contract
 
 - ??? -> ???
