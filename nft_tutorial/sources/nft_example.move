@@ -1,7 +1,6 @@
 module nft_tutorial::nft_example {
 
     use sui::url::{Self, Url};
-
     use sui::tx_context::{sender, TxContext};
     use std::string::{utf8, String};
     use sui::transfer;
@@ -15,8 +14,7 @@ module nft_tutorial::nft_example {
         id: UID,
         name: String,
         description: String,
-        url: Url,
-        // ... Additional attributes for various use cases (i.e. game, social profile, etc.)
+        image_url: Url,
     }
 
     public entry fun mint_to_sender(
@@ -30,7 +28,7 @@ module nft_tutorial::nft_example {
             id: object::new(ctx),
             name: utf8(name),
             description: utf8(description),
-            url: url::new_unsafe_from_bytes(url)
+            image_url: url::new_unsafe_from_bytes(url)
         };
 
         transfer::transfer(nft, sender);
@@ -48,27 +46,28 @@ module nft_tutorial::nft_example {
     fun init(otw: NFT_EXAMPLE, ctx: &mut TxContext) {
         let keys = vector[
             utf8(b"name"),
-            utf8(b"link"),
-            utf8(b"image_url"),
             utf8(b"description"),
-            utf8(b"project_url"),
-            utf8(b"creator"),
+            //utf8(b"link"),
+            utf8(b"image_url"),
+            //utf8(b"project_url"),
+            //utf8(b"creator"),
         ];
 
         let values = vector[
             // For `name` we can use the `NFT.name` property
             utf8(b"{name}"),
-            // For `link` we can build a URL using an `id` property
-            utf8(b"https://sui-heroes.io/hero/{id}"),
-            // For `image_url` we use an IPFS template + `img_url` property.
-            utf8(b"https://upload.wikimedia.org/wikipedia/en/4/43/Digimon_Digital_Monsters_Season_1_DVD_Cover.png"),
-            //utf8(b"https://raw.githubusercontent.com/laurentroque/encode-sui-educate/main/nft_tutorial/test/test.png"),
             // Description is static for all `NFT` objects.
-            utf8(b"A true NFT of the Sui ecosystem!"),
+            utf8(b"{description}"),
+            // For `link` we can build a URL using an `id` property
+            //utf8(b"https://sui-heroes.io/hero/{id}"),
+            // For `image_url` we use an IPFS template + `img_url` property.
+            utf8(b"{image_url}"),
+            //utf8(b"https://upload.wikimedia.org/wikipedia/en/4/43/Digimon_Digital_Monsters_Season_1_DVD_Cover.png"),
+            //utf8(b"https://raw.githubusercontent.com/laurentroque/encode-sui-educate/main/nft_tutorial/test/test.png"),
             // Project URL is usually static
-            utf8(b"https://sui-heroes.io"),
+            //utf8(b"https://sui-heroes.io"),
             // Creator field can be any
-            utf8(b"Unknown Sui Fan")
+            //utf8(b"Unknown Sui Fan")
         ];
 
         // Claim the `Publisher` for the package!

@@ -15,3 +15,12 @@ Sui Foundation Git Repo: https://github.com/sui-foundation/encode-sui-educate
 - nft_tutorial -> NFT Contract
 
 - ??? -> ???
+
+
+## Directions
+in the source folder
+sui move build
+
+in the build folder
+sui client publish nft_tutorial --gas-budget 200000000
+
